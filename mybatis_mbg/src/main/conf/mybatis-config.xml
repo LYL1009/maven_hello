@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--MyBatis的全局配置文件-->
+<configuration>
+    <settings>
+<!--    开启延迟加载开关    -->
+        <setting name="lazyLoadingEnabled" value="true"/>
+<!--    开启属性按需加载    -->
+        <setting name="aggressiveLazyLoading" value="false"/>
+<!--    开启全局缓存开关    -->
+        <setting name="cacheEnabled" value="true"/>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+<!--    <plugins>-->
+<!--        <plugin interceptor="com.github.pagehelper.PageHelper"></plugin>-->
+<!--    </plugins>-->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <!-- 配置连接池 -->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/mybatis?serverTimezone=UTC"/>
+                <property name="username" value="root"/>
+                <property name="password" value="123456"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--  引入我们自己编写的每一个接口的实现文件  -->
+    <mappers>
+<!--   class：直接引用接口的全类名；可以将xml放在和dao接口同目录下，而且文件名和接口名一致    -->
+<!--        <mapper class="com.lyl.dao.EmployeeDaoAnnotation"/>-->
+        <!--   批量注册 name="com.lyl.dao"：dao所在的包名  -->
+        <!--  注解和配置可以共同使用；重要的dao写配置，简单的dao写注解；  -->
+        <package name="com.lyl.dao"/>
+    </mappers>
+</configuration>
